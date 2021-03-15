@@ -49,19 +49,25 @@ def one_hot_enconding_first_collumn(x):
 	
 	return x
 
-def laber_encoder_last_collumn(x):
+def laber_encoder_last_collumn(y):
 	"""This function is responsable for laber encoder the last collumn of an
 	array
 
 	Args:
-			x (array): array with the last row to be labeled
+			y (array): array with the last row to be labeled
 	Returns:
 			array: array labeled
 	"""	
 	from sklearn.preprocessing import LabelEncoder
 
+	le = LabelEncoder()
+	y = le.fit_transform(y)
+
+	return y
+
 x, y = importing_dataset_returning_xy()
 x = replacing_missing_values_with_avarage(x)
 x = one_hot_enconding_first_collumn(x)
+y = laber_encoder_last_collumn(y)
 
-print(x)
+print(y)
