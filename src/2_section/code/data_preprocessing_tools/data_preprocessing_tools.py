@@ -71,16 +71,47 @@ def laber_encoder_last_collumn(y):
 
 	return y
 
+def splitting_data(x, y):
+	"""
+	This factory receives the x and y variables builded before for modeling and
+	returns the train and test objects
+
+	Args:
+			x numpy array: numpy array with the independent variables
+			y array: and array with the dependent variable
+
+	Returns:
+			array: he train and test objects to make the predictions
+	"""	
+	from sklearn.model_selection import train_test_split
+
+	X_train, x_test, Y_train, y_test = train_test_split(
+		x,
+		y,
+		test_size = 0.2,
+		random_state = 1
+	)
+
+	return X_train, x_test, Y_train, y_test
+
 def main():
 	"""
+	
 	This factory is responsable to call all the other factories which are neadded
 	to do the model
+
 	"""	
 	x, y = importing_dataset_returning_xy()
 	x = replacing_missing_values_with_avarage(x)
 	x = one_hot_enconding_first_collumn(x)
 	y = laber_encoder_last_collumn(y)
 
-	print(y)
+	X_train, x_test, Y_train, y_test = splitting_data(x, y)
+
+	print(X_train)
+	print(x_test)
+	print(Y_train)
+	print(y_test)
+
 
 main()
