@@ -3,6 +3,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def importing_dataset_returning_xy():
+	"""This function imports the dataset and returns x and y to an
+	ml or mdl model
+
+	Returns:
+			x, y: separated structurs to continue the model
+	"""	
 	dataset = pd.read_csv("../../data/Data.csv")
 	x = dataset.iloc[:, :-1].values
 	y = dataset.iloc[:, -1].values
@@ -65,9 +71,12 @@ def laber_encoder_last_collumn(y):
 
 	return y
 
-x, y = importing_dataset_returning_xy()
-x = replacing_missing_values_with_avarage(x)
-x = one_hot_enconding_first_collumn(x)
-y = laber_encoder_last_collumn(y)
+def main():
+	x, y = importing_dataset_returning_xy()
+	x = replacing_missing_values_with_avarage(x)
+	x = one_hot_enconding_first_collumn(x)
+	y = laber_encoder_last_collumn(y)
 
-print(y)
+	print(y)
+
+main()
