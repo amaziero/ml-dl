@@ -94,6 +94,25 @@ def splitting_data(x, y):
 
 	return X_train, x_test, Y_train, y_test
 
+def feature_scalling(X_train, x_test):
+	"""
+	This function applies an feature scalling methods to X_train and x_test
+	arrays
+
+	Args:
+			X_train (array): X_train array with 80% of the values
+			x_test (array): X_test array with 20% of the values
+
+	Returns:
+			array: stantalized arrays
+	"""	
+	from sklearn.preprocessing import StandardScaler
+	sc = StandardScaler()
+	X_train[:, 3:] = sc.fit_transform(X_train[:, 3:])
+	x_test[:, 3:] = sc.transform(x_test[:, 3:])
+
+	return X_train, x_test
+
 def main():
 	"""
 	
@@ -108,10 +127,10 @@ def main():
 
 	X_train, x_test, Y_train, y_test = splitting_data(x, y)
 
+	X_train, x_test = feature_scalling(X_train, x_test)
+
 	print(X_train)
 	print(x_test)
-	print(Y_train)
-	print(y_test)
 
 
 main()
