@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def importing_dataset_returning_xy():
-	"""This function imports the dataset and returns x and y to an
+	"""This factory imports the dataset and returns x and y to an
 	ml or mdl model
 
 	Returns:
@@ -15,7 +15,7 @@ def importing_dataset_returning_xy():
 	return x, y
 
 def replacing_missing_values_with_avarage(x):
-	"""This function replaces missing values with the mean value of the collumn's
+	"""This factory replaces missing values with the mean value of the collumn's
 
 	Args:
 			x array: array
@@ -30,7 +30,7 @@ def replacing_missing_values_with_avarage(x):
 	return x
 
 def one_hot_enconding_first_collumn(x):
-	"""This function is responsable for encoding the colluns with str values
+	"""This factory is responsable for encoding the colluns with str values
 	in this case onle the fisrt collumn is appliable
 
 	Args:
@@ -56,7 +56,7 @@ def one_hot_enconding_first_collumn(x):
 	return x
 
 def laber_encoder_last_collumn(y):
-	"""This function is responsable for laber encoder the last collumn of an
+	"""This factory is responsable for laber encoder the last collumn of an
 	array
 
 	Args:
@@ -72,6 +72,10 @@ def laber_encoder_last_collumn(y):
 	return y
 
 def main():
+	"""
+	This factory is responsable to call all the other factories which are neadded
+	to do the model
+	"""	
 	x, y = importing_dataset_returning_xy()
 	x = replacing_missing_values_with_avarage(x)
 	x = one_hot_enconding_first_collumn(x)
