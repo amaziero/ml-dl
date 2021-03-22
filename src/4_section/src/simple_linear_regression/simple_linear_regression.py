@@ -37,7 +37,7 @@ def splitting_data(x, y):
 
 	return X_train, x_test, Y_train, y_test
 
-def training_simple_linear_regretion(X_train, Y_train, x_test):
+def training_simple_linear_regression(X_train, Y_train, x_test):
 	
 	"""
 		Training simple dataset to make linear regressions predictions
@@ -51,9 +51,28 @@ def training_simple_linear_regretion(X_train, Y_train, x_test):
 	regressor = LinearRegression()
 	regressor.fit(X_train, Y_train)
 
-	y_prediction = regressor.predict(x_test)
+	y_prediction_test = regressor.predict(x_test)
+	y_prediction_train = regressor.predict(X_train)
 
-	return y_prediction
+
+	return y_prediction, y_prediction_train
+
+def visualising_train(
+	type = 'Test',
+	X_train_test,
+	y_train_test,
+	y_prediction_train
+	):
+	# train variables
+
+	plt.scatter(X_train_test, y_train_test, color = 'red')
+	plt.plot(X_train_test, y_prediction_train, color = 'blue')
+	plt.title(f'Salary x Experience ( ${type} Set )')
+
+	plt.xlaber('Years of Experience')
+	plt.ylaber('Salary')
+
+	plt.show()
 
 def main():
 	"""
@@ -65,6 +84,14 @@ def main():
 	x, y = importing_dataset_returning_xy()
 	X_train, x_test, Y_train, y_test = splitting_data(x, y)
 	
-	y_prediction = training_simple_linear_regretion(X_train, Y_train, x_test)
+	y_prediction, y_prediction_train =
+	training_simple_linear_regression(
+		X_train,
+		Y_train,
+		x_test
+	)
+
+	visualising_train(X_train, y_train, y_prediction_train)
+	visualising_train(type = "Test", x_test, y_test, y_prediction_train)
 
 main()
