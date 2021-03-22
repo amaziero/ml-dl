@@ -1,3 +1,4 @@
+#%%
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -55,22 +56,19 @@ def training_simple_linear_regression(X_train, Y_train, x_test):
 	y_prediction_train = regressor.predict(X_train)
 
 
-	return y_prediction, y_prediction_train
+	return y_prediction_test, y_prediction_train
 
-def visualising_train(
-	type = 'Test',
-	X_train_test,
-	y_train_test,
-	y_prediction_train
-	):
-	# train variables
+def visualising_train(X_train, y_train_test, y_prediction_train_test, x_test = None, type = 'Test'):
+	if x_test is None:
+		plt.scatter(X_train, y_train_test, color = 'red')
+	else:
+		plt.scatter(x_test, y_train_test, color = 'red')
 
-	plt.scatter(X_train_test, y_train_test, color = 'red')
-	plt.plot(X_train_test, y_prediction_train, color = 'blue')
+	plt.plot(X_train, y_prediction_train_test, color = 'blue')
 	plt.title(f'Salary x Experience ( ${type} Set )')
 
-	plt.xlaber('Years of Experience')
-	plt.ylaber('Salary')
+	plt.xlabel('Years of Experience')
+	plt.ylabel('Salary')
 
 	plt.show()
 
@@ -84,14 +82,13 @@ def main():
 	x, y = importing_dataset_returning_xy()
 	X_train, x_test, Y_train, y_test = splitting_data(x, y)
 	
-	y_prediction, y_prediction_train =
-	training_simple_linear_regression(
+	y_prediction_test, y_prediction_train = training_simple_linear_regression(
 		X_train,
 		Y_train,
 		x_test
 	)
 
-	visualising_train(X_train, y_train, y_prediction_train)
-	visualising_train(type = "Test", x_test, y_test, y_prediction_train)
+	visualising_train(X_train, y_train_test = Y_train, y_prediction_train_test = y_prediction_train)
+	visualising_train(X_train, x_test =  x_test, y_train_test =  y_test, y_prediction_train_test = y_prediction_train, type = "Train")
 
 main()
