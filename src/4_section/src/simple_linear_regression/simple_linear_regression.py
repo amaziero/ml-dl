@@ -38,14 +38,22 @@ def splitting_data(x, y):
 	return X_train, x_test, Y_train, y_test
 
 def training_simple_linear_regretion(X_train, Y_train, x_test):
+	
+	"""
+		Training simple dataset to make linear regressions predictions
+
+	Returns:
+			arrays X_train, Ytrain and x_test: returns prediction based on x_test
+	"""	
+	
 	from sklearn.linear_model import LinearRegression
 	
 	regressor = LinearRegression()
 	regressor.fit(X_train, Y_train)
 
-	prediction = regressor.predict(x_test)
+	y_prediction = regressor.predict(x_test)
 
-	print(prediction)
+	return y_prediction
 
 def main():
 	"""
@@ -57,6 +65,6 @@ def main():
 	x, y = importing_dataset_returning_xy()
 	X_train, x_test, Y_train, y_test = splitting_data(x, y)
 	
-	training_simple_linear_regretion(X_train, Y_train, x_test)
+	y_prediction = training_simple_linear_regretion(X_train, Y_train, x_test)
 
 main()
