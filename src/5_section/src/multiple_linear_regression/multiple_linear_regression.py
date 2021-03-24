@@ -15,29 +15,6 @@ def importing_dataset_returning_xy():
 	y = dataset.iloc[:, -1].values
 	return x, y
 
-def splitting_data(x, y):
-	"""
-	This factory receives the x and y variables builded before for modeling and
-	returns the train and test objects
-
-	Args:
-			x numpy array: numpy array with the independent variables
-			y array: and array with the dependent variable
-
-	Returns:
-			array: he train and test objects to make the predictions
-	"""	
-	from sklearn.model_selection import train_test_split
-
-	X_train, x_test, Y_train, y_test = train_test_split(
-		x,
-		y,
-		test_size = 0.2,
-		random_state = 1
-	)
-
-	return X_train, x_test, Y_train, y_test
-
 def one_hot_enconding(x):
 	"""This factory is responsable for encoding the colluns with str values
 	in this case onle the fisrt collumn is appliable
@@ -64,6 +41,41 @@ def one_hot_enconding(x):
 	
 	return x
 
+def splitting_data(x, y):
+	"""
+	This factory receives the x and y variables builded before for modeling and
+	returns the train and test objects
+
+	Args:
+			x numpy array: numpy array with the independent variables
+			y array: and array with the dependent variable
+
+	Returns:
+			array: he train and test objects to make the predictions
+	"""	
+	from sklearn.model_selection import train_test_split
+
+	X_train, x_test, Y_train, y_test = train_test_split(
+		x,
+		y,
+		test_size = 0.2,
+		random_state = 1
+	)
+
+	return X_train, x_test, Y_train, y_test
+
+def training_multiple_regression(X_train, x_test, Y_train, y_test):
+	from sklearn.linear_model import LinearRegression
+	regresson = LinearRegression()
+
+	regresson.fit(X_train, Y_train)
+
+	y_pred = regresson.predict(x_test)
+
+	np.set_printoptions(precision = 2)
+
+	print(np.concatenate((y_pred.reshape(len(y_pred), 1), y_test.reshape(len(y_test), 1)), 1))
+
 def main():
 	"""
 
@@ -75,8 +87,8 @@ def main():
 
 	x = one_hot_enconding(x)
 
-	print(x)
+	X_train, x_test, Y_train, y_test = splitting_data(x, y)
 
-	# X_train, x_test, Y_train, y_test = splitting_data(x, y)
+	training_multiple_regression(X_train, x_test, Y_train, y_test)
 
 main()
