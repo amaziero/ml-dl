@@ -30,14 +30,12 @@ def training_polominial_model(x, y):
 	lin_reg_2 = LinearRegression()
 	lin_reg_2.fit(x_poly, y)
 
-	return lin_reg_2, x_poly
-
-	
+	return lin_reg_2, x_poly, poly_Regr
 
 def main():
 	x, y = importing_dataset_returning_xy()
 	lin_reg = training_simple_model(x, y)
-	lin_reg_2, x_poly = training_polominial_model(x, y)
+	lin_reg_2, x_poly, poly_Regr = training_polominial_model(x, y)
 
 	plt.scatter(x, y, color = 'red')
 	plt.plot(x, lin_reg.predict(x), color = 'blue')
@@ -49,6 +47,10 @@ def main():
 	plt.xlabel('Position Levels')
 	plt.ylabel('Salary')
 
+	# Prediction
+
+	predicted_salary = lin_reg_2.predict(poly_Regr.fit_transform([[6.5]]))
+	print(predicted_salary)
 
 main()
 # %%
